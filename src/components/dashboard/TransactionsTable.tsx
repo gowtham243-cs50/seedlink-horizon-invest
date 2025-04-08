@@ -11,7 +11,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
-import { Plant } from 'lucide-react';
+import { Plane } from 'lucide-react';
 
 type Transaction = {
   id: string;
@@ -50,7 +50,7 @@ const TransactionsTable = ({ transactions, className }: TransactionsTableProps) 
                 <TableCell className="text-seedlink-light-text">{transaction.date}</TableCell>
                 <TableCell className="text-seedlink-light-text">
                   <div className="flex items-center gap-2">
-                    <Plant size={14} className="text-seedlink-secondary" />
+                    <Plane size={14} className="text-seedlink-secondary" />
                     {transaction.spvName}
                   </div>
                 </TableCell>

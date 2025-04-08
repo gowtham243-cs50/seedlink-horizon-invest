@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
-import { Plant, Leaf, Wheat, Tree } from 'lucide-react';
+import { Plane, Leaf } from 'lucide-react';
 
 interface PortfolioChartProps {
   data: {
@@ -18,13 +18,13 @@ const PortfolioChart: React.FC<PortfolioChartProps> = ({ data }) => {
     switch (name) {
       case 'Sustainable Crops':
       case 'Tech SPVs':
-        return <Plant className="inline-block mr-1" size={14} />;
+        return <Plane className="inline-block mr-1" size={14} />;
       case 'Organic Farming':
       case 'Real Estate':
-        return <Tree className="inline-block mr-1" size={14} />;
+        return <Plane className="inline-block mr-1" size={14} />;
       case 'Regenerative Agriculture':
       case 'Clean Energy':
-        return <Wheat className="inline-block mr-1" size={14} />;
+        return <Plane className="inline-block mr-1" size={14} />;
       case 'Community Gardens':
       case 'Healthcare':
         return <Leaf className="inline-block mr-1" size={14} />;

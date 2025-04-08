@@ -19,9 +19,10 @@ import {
 
 interface NavbarProps {
   className?: string;
+  pageTitle?: string; // Added pageTitle prop
 }
 
-const Navbar = ({ className }: NavbarProps) => {
+const Navbar = ({ className, pageTitle }: NavbarProps) => {
   return (
     <div className={cn('flex items-center justify-between h-16 px-6 border-b border-white/5', className)}>
       <div className="flex items-center gap-4 md:w-72">
@@ -58,7 +59,7 @@ const Navbar = ({ className }: NavbarProps) => {
             <DropdownMenuItem className="cursor-pointer hover:bg-seedlink-secondary/10">Settings</DropdownMenuItem>
             <DropdownMenuItem className="cursor-pointer hover:bg-seedlink-secondary/10">Investments</DropdownMenuItem>
             <DropdownMenuSeparator className="bg-white/5" />
-            <DropdownMenuItem className="cursor-pointer hover:bg-destructive/20">Sign out</DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer hover:bg-seedlink-secondary/10">Sign out</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

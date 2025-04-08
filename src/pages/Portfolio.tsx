@@ -7,7 +7,7 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { AreaChart, Area, PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
-import { Plant, Leaf, Wheat } from 'lucide-react';
+import { Plane, Leaf } from 'lucide-react';
 
 const Portfolio = () => {
   // Portfolio allocation data
@@ -215,9 +215,9 @@ const Portfolio = () => {
                 <TableRow key={investment.id} className="border-white/5 hover:bg-white/5">
                   <TableCell className="text-seedlink-light-text font-medium">{investment.fundName}</TableCell>
                   <TableCell>
-                    {investment.type === 'Crop Farming' && <Plant className="inline-block mr-1" size={16} />}
+                    {investment.type === 'Crop Farming' && <Plane className="inline-block mr-1" size={16} />}
                     {investment.type === 'Organic' && <Leaf className="inline-block mr-1" size={16} />}
-                    {investment.type === 'Regenerative' && <Wheat className="inline-block mr-1" size={16} />}
+                    {investment.type === 'Regenerative' && <Plane className="inline-block mr-1" size={16} />}
                     <span className="text-seedlink-light-text">{investment.type}</span>
                   </TableCell>
                   <TableCell className="text-seedlink-light-text text-right">${investment.invested.toLocaleString()}</TableCell>

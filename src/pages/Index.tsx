@@ -6,7 +6,7 @@ import StatCard from '@/components/dashboard/StatCard';
 import PortfolioChart from '@/components/dashboard/PortfolioChart';
 import InvestmentOpportunities from '@/components/dashboard/InvestmentOpportunities';
 import TransactionsTable from '@/components/dashboard/TransactionsTable';
-import { Briefcase, TrendingUp, LineChart, Plant, Sprout } from 'lucide-react';
+import { Briefcase, TrendingUp, LineChart, Plane, Sprout } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Index = () => {
@@ -133,7 +133,7 @@ const Index = () => {
         <StatCard 
           title="Farmers Supported"
           value="467"
-          icon={<Plant size={24} />}
+          icon={<Plane size={24} />}
           trend={{ value: 24, isPositive: true }}
         />
       </div>
