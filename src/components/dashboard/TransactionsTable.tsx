@@ -11,6 +11,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { Plant } from 'lucide-react';
 
 type Transaction = {
   id: string;
@@ -18,6 +19,7 @@ type Transaction = {
   spvName: string;
   amount: number;
   status: 'completed' | 'pending' | 'failed';
+  farmers?: number;
 };
 
 interface TransactionsTableProps {
@@ -36,8 +38,9 @@ const TransactionsTable = ({ transactions, className }: TransactionsTableProps) 
           <TableHeader>
             <TableRow className="border-white/5 hover:bg-transparent">
               <TableHead className="text-seedlink-muted-text">Date</TableHead>
-              <TableHead className="text-seedlink-muted-text">SPV Name</TableHead>
+              <TableHead className="text-seedlink-muted-text">Agricultural Fund</TableHead>
               <TableHead className="text-seedlink-muted-text text-right">Amount</TableHead>
+              <TableHead className="text-seedlink-muted-text text-right">Farmers</TableHead>
               <TableHead className="text-seedlink-muted-text text-right">Status</TableHead>
             </TableRow>
           </TableHeader>
@@ -45,9 +48,17 @@ const TransactionsTable = ({ transactions, className }: TransactionsTableProps) 
             {transactions.map((transaction) => (
               <TableRow key={transaction.id} className="border-white/5 hover:bg-white/5">
                 <TableCell className="text-seedlink-light-text">{transaction.date}</TableCell>
-                <TableCell className="text-seedlink-light-text">{transaction.spvName}</TableCell>
+                <TableCell className="text-seedlink-light-text">
+                  <div className="flex items-center gap-2">
+                    <Plant size={14} className="text-seedlink-secondary" />
+                    {transaction.spvName}
+                  </div>
+                </TableCell>
                 <TableCell className="text-seedlink-light-text text-right">
                   ${transaction.amount.toLocaleString()}
+                </TableCell>
+                <TableCell className="text-seedlink-light-text text-right">
+                  {transaction.farmers || "-"}
                 </TableCell>
                 <TableCell className="text-right">
                   <TransactionStatus status={transaction.status} />

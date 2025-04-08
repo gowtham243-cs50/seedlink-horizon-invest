@@ -38,9 +38,9 @@ const InvestmentOpportunities = ({ opportunities, className }: InvestmentOpportu
     <Card className={cn("glass-card", className)}>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <div>
-          <CardTitle className="text-lg text-seedlink-light-text">Investment Opportunities</CardTitle>
+          <CardTitle className="text-lg text-seedlink-light-text">Agricultural Fund Opportunities</CardTitle>
           <CardDescription className="text-seedlink-muted-text">
-            Discover promising new investment options
+            Support sustainable farming and earn returns
           </CardDescription>
         </div>
         <div className="flex space-x-2">

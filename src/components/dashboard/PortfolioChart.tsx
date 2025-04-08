@@ -2,6 +2,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
+import { Plant, Leaf, Wheat, Tree } from 'lucide-react';
 
 interface PortfolioChartProps {
   data: {
@@ -12,10 +13,34 @@ interface PortfolioChartProps {
 }
 
 const PortfolioChart: React.FC<PortfolioChartProps> = ({ data }) => {
+  // Add icons for each category
+  const getIconForCategory = (name: string) => {
+    switch (name) {
+      case 'Sustainable Crops':
+      case 'Tech SPVs':
+        return <Plant className="inline-block mr-1" size={14} />;
+      case 'Organic Farming':
+      case 'Real Estate':
+        return <Tree className="inline-block mr-1" size={14} />;
+      case 'Regenerative Agriculture':
+      case 'Clean Energy':
+        return <Wheat className="inline-block mr-1" size={14} />;
+      case 'Community Gardens':
+      case 'Healthcare':
+        return <Leaf className="inline-block mr-1" size={14} />;
+      default:
+        return null;
+    }
+  };
+
+  const renderCustomizedLabel = ({ name, percent }: { name: string, percent: number }) => {
+    return `${name}: ${(percent * 100).toFixed(0)}%`;
+  };
+
   return (
     <Card className="glass-card">
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg text-seedlink-light-text">Portfolio Distribution</CardTitle>
+        <CardTitle className="text-lg text-seedlink-light-text">Agricultural Portfolio</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="h-[300px] w-full">
@@ -29,7 +54,7 @@ const PortfolioChart: React.FC<PortfolioChartProps> = ({ data }) => {
                 outerRadius={90}
                 paddingAngle={4}
                 dataKey="value"
-                label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                label={renderCustomizedLabel}
                 labelLine={false}
               >
                 {data.map((entry, index) => (
@@ -46,7 +71,9 @@ const PortfolioChart: React.FC<PortfolioChartProps> = ({ data }) => {
                 layout="horizontal" 
                 verticalAlign="bottom" 
                 align="center"
-                formatter={(value) => <span style={{ color: '#A0AEC0' }}>{value}</span>}
+                formatter={(value) => (
+                  <span style={{ color: '#A0AEC0' }}>{getIconForCategory(value)}{value}</span>
+                )}
               />
             </PieChart>
           </ResponsiveContainer>

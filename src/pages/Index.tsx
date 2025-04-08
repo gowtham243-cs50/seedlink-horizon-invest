@@ -1,101 +1,108 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import StatCard from '@/components/dashboard/StatCard';
 import PortfolioChart from '@/components/dashboard/PortfolioChart';
 import InvestmentOpportunities from '@/components/dashboard/InvestmentOpportunities';
 import TransactionsTable from '@/components/dashboard/TransactionsTable';
-import { Briefcase, TrendingUp, LineChart } from 'lucide-react';
+import { Briefcase, TrendingUp, LineChart, Plant, Sprout } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const Index = () => {
-  // Mock data for portfolio chart
+  // Mock data for portfolio chart (agricultural focus)
   const portfolioData = [
-    { name: 'Tech SPVs', value: 45000, color: '#38B2AC' },
-    { name: 'Real Estate', value: 28000, color: '#805AD5' },
-    { name: 'Clean Energy', value: 18000, color: '#F6AD55' },
-    { name: 'Healthcare', value: 14000, color: '#4FD1C5' },
+    { name: 'Sustainable Crops', value: 45000, color: '#38B2AC' },
+    { name: 'Organic Farming', value: 28000, color: '#805AD5' },
+    { name: 'Regenerative Agriculture', value: 18000, color: '#F6AD55' },
+    { name: 'Community Gardens', value: 14000, color: '#4FD1C5' },
   ];
 
-  // Mock data for investment opportunities
+  // Mock data for investment opportunities (agricultural focus)
   const opportunities = [
     {
       id: '1',
-      title: 'SolarTech Growth SPV',
-      category: 'Clean Energy',
+      title: 'Regenerative Farming Collective',
+      category: 'Regenerative Agriculture',
       minInvestment: 10000,
       returnRate: 14.5,
-      image: 'https://images.unsplash.com/photo-1501876725168-00c445821c9e?q=80&w=2970&auto=format&fit=crop'
+      image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2970&auto=format&fit=crop'
     },
     {
       id: '2',
-      title: 'Urban Real Estate Fund',
-      category: 'Real Estate',
+      title: 'Urban Farming Initiative',
+      category: 'Community Gardens',
       minInvestment: 25000,
       returnRate: 9.8,
-      image: 'https://images.unsplash.com/photo-1494891848038-7bd202a2afeb?q=80&w=2971&auto=format&fit=crop'
+      image: 'https://images.unsplash.com/photo-1486328228599-85db4443971f?q=80&w=2970&auto=format&fit=crop'
     },
     {
       id: '3',
-      title: 'BioTech Innovation',
-      category: 'Healthcare',
+      title: 'Sustainable Crop Fund',
+      category: 'Sustainable Farming',
       minInvestment: 15000,
       returnRate: 16.2,
-      image: 'https://images.unsplash.com/photo-1628595351029-c2bf17511435?q=80&w=2958&auto=format&fit=crop'
+      image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2970&auto=format&fit=crop'
     },
     {
       id: '4',
-      title: 'AI Solutions Fund',
-      category: 'Technology',
+      title: 'Organic Farmers Cooperative',
+      category: 'Organic Farming',
       minInvestment: 20000,
-      returnRate: 18.5,
-      image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2920&auto=format&fit=crop'
+      returnRate: 12.5,
+      image: 'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=2970&auto=format&fit=crop'
     },
     {
       id: '5',
-      title: 'Sustainable Housing',
-      category: 'Real Estate',
+      title: 'Small Farmers Alliance',
+      category: 'Rural Development',
       minInvestment: 30000,
       returnRate: 10.2,
-      image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2835&auto=format&fit=crop'
+      image: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2970&auto=format&fit=crop'
     }
   ];
 
-  // Mock data for transactions
+  // Mock data for transactions (agricultural focus)
   const transactions = [
     {
       id: 't1',
       date: 'Apr 05, 2025',
-      spvName: 'Tech Growth Fund',
+      spvName: 'Regenerative Farming Collective',
       amount: 25000,
-      status: 'completed' as const
+      status: 'completed' as const,
+      farmers: 120
     },
     {
       id: 't2',
       date: 'Apr 03, 2025',
-      spvName: 'Healthcare Innovation',
+      spvName: 'Sustainable Crop Fund',
       amount: 15000,
-      status: 'pending' as const
+      status: 'pending' as const,
+      farmers: 85
     },
     {
       id: 't3',
       date: 'Mar 28, 2025',
-      spvName: 'Clean Energy SPV',
+      spvName: 'Urban Farming Initiative',
       amount: 10000,
-      status: 'completed' as const
+      status: 'completed' as const,
+      farmers: 65
     },
     {
       id: 't4',
       date: 'Mar 20, 2025',
-      spvName: 'Real Estate Fund',
-      amount: 50000,
-      status: 'failed' as const
+      spvName: 'Organic Farmers Cooperative',
+      amount: 20000,
+      status: 'failed' as const,
+      farmers: 92
     },
     {
       id: 't5',
       date: 'Mar 15, 2025',
-      spvName: 'Tech Startups Fund',
-      amount: 20000,
-      status: 'completed' as const
+      spvName: 'Small Farmers Alliance',
+      amount: 30000,
+      status: 'completed' as const,
+      farmers: 105
     }
   ];
 
@@ -105,7 +112,7 @@ const Index = () => {
       <div className="mb-8">
         <h1 className="text-3xl font-bold animate-fade-in">Welcome back, Jessica</h1>
         <p className="text-seedlink-muted-text mt-1">
-          Here's an overview of your investment portfolio
+          Here's an overview of your agricultural investment portfolio
         </p>
       </div>
 
@@ -124,11 +131,28 @@ const Index = () => {
           trend={{ value: 2.1, isPositive: true }}
         />
         <StatCard 
-          title="Active Investments"
-          value="7"
-          icon={<LineChart size={24} />}
-          trend={{ value: 1, isPositive: true }}
+          title="Farmers Supported"
+          value="467"
+          icon={<Plant size={24} />}
+          trend={{ value: 24, isPositive: true }}
         />
+      </div>
+
+      {/* Quick Links */}
+      <div className="flex flex-wrap gap-4 mb-8">
+        <Link to="/portfolio">
+          <Button variant="outline" className="border-white/10 bg-seedlink-dark-card hover:bg-seedlink-secondary/10 hover:text-seedlink-secondary">
+            <Briefcase size={16} className="mr-2" /> View Full Portfolio
+          </Button>
+        </Link>
+        <Link to="/transactions">
+          <Button variant="outline" className="border-white/10 bg-seedlink-dark-card hover:bg-seedlink-secondary/10 hover:text-seedlink-secondary">
+            <LineChart size={16} className="mr-2" /> Transaction History
+          </Button>
+        </Link>
+        <Button variant="outline" className="border-white/10 bg-seedlink-dark-card hover:bg-seedlink-secondary/10 hover:text-seedlink-secondary">
+          <Sprout size={16} className="mr-2" /> Impact Report
+        </Button>
       </div>
 
       {/* Investment Opportunities */}
