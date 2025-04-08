@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -11,7 +12,8 @@ import {
   Settings, 
   CreditCard, 
   PieChart,
-  Briefcase
+  Briefcase,
+  Sprout
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -20,6 +22,7 @@ interface SidebarProps {
 
 const Sidebar = ({ className }: SidebarProps) => {
   const [collapsed, setCollapsed] = useState(false);
+  const location = useLocation();
 
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
@@ -52,35 +55,46 @@ const Sidebar = ({ className }: SidebarProps) => {
       <div className="flex flex-col flex-grow p-4 space-y-6">
         <TooltipProvider delayDuration={0}>
           <NavItem 
+            to="/"
             icon={<LayoutDashboard size={20} />} 
             label="Dashboard" 
-            collapsed={collapsed} 
-            active 
+            collapsed={collapsed}
+            active={location.pathname === '/'}
           />
           <NavItem 
-            icon={<Briefcase size={20} />} 
+            to="/investments"
+            icon={<Sprout size={20} />} 
             label="Investments" 
-            collapsed={collapsed} 
+            collapsed={collapsed}
+            active={location.pathname === '/investments'}
           />
           <NavItem 
+            to="/portfolio"
             icon={<PieChart size={20} />} 
             label="Portfolio" 
-            collapsed={collapsed} 
+            collapsed={collapsed}
+            active={location.pathname === '/portfolio'}
           />
           <NavItem 
+            to="/market-trends"
             icon={<LineChart size={20} />} 
             label="Market Trends" 
-            collapsed={collapsed} 
+            collapsed={collapsed}
+            active={location.pathname === '/market-trends'}
           />
           <NavItem 
+            to="/transactions"
             icon={<CreditCard size={20} />} 
             label="Transactions" 
-            collapsed={collapsed} 
+            collapsed={collapsed}
+            active={location.pathname === '/transactions'}
           />
           <NavItem 
+            to="/settings"
             icon={<Settings size={20} />} 
             label="Settings" 
-            collapsed={collapsed} 
+            collapsed={collapsed}
+            active={location.pathname === '/settings'}
           />
         </TooltipProvider>
       </div>
@@ -100,25 +114,28 @@ const Sidebar = ({ className }: SidebarProps) => {
 };
 
 interface NavItemProps {
+  to: string;
   icon: React.ReactNode;
   label: string;
   collapsed: boolean;
   active?: boolean;
 }
 
-const NavItem = ({ icon, label, collapsed, active }: NavItemProps) => {
+const NavItem = ({ to, icon, label, collapsed, active }: NavItemProps) => {
   if (collapsed) {
     return (
       <Tooltip>
         <TooltipTrigger asChild>
-          <button
-            className={cn(
-              'sidebar-icon',
-              active ? 'text-seedlink-secondary bg-seedlink-secondary/10' : 'text-seedlink-muted-text hover:text-seedlink-secondary hover:bg-seedlink-secondary/5'
-            )}
-          >
-            {icon}
-          </button>
+          <Link to={to}>
+            <button
+              className={cn(
+                'sidebar-icon',
+                active ? 'text-seedlink-secondary bg-seedlink-secondary/10' : 'text-seedlink-muted-text hover:text-seedlink-secondary hover:bg-seedlink-secondary/5'
+              )}
+            >
+              {icon}
+            </button>
+          </Link>
         </TooltipTrigger>
         <TooltipContent side="right">
           <p>{label}</p>
@@ -128,15 +145,17 @@ const NavItem = ({ icon, label, collapsed, active }: NavItemProps) => {
   }
 
   return (
-    <button
-      className={cn(
-        'sidebar-item',
-        active && 'active'
-      )}
-    >
-      {icon}
-      <span>{label}</span>
-    </button>
+    <Link to={to}>
+      <button
+        className={cn(
+          'sidebar-item',
+          active && 'active'
+        )}
+      >
+        {icon}
+        <span>{label}</span>
+      </button>
+    </Link>
   );
 };
 

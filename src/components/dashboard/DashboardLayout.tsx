@@ -17,6 +17,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     const path = location.pathname;
     if (path === '/portfolio') return 'Portfolio';
     if (path === '/transactions') return 'Transactions';
+    if (path === '/investments') return 'Investments';
     return 'Dashboard';
   };
 
@@ -25,7 +26,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <Sidebar />
       
       <div className="flex-1 flex flex-col overflow-hidden">
-        <Navbar pageTitle={getPageTitle()} />
+        <Navbar className="" pageTitle={getPageTitle()} />
         
         <main className="flex-1 overflow-y-auto p-6">
           <div className="container mx-auto">

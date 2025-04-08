@@ -22,12 +22,15 @@ interface NavbarProps {
   pageTitle?: string; // Added pageTitle prop
 }
 
-const Navbar = ({ className, pageTitle }: NavbarProps) => {
+const Navbar = ({ className, pageTitle = "Dashboard" }: NavbarProps) => {
   return (
     <div className={cn('flex items-center justify-between h-16 px-6 border-b border-white/5', className)}>
       <div className="flex items-center gap-4 md:w-72">
         <div className="flex md:hidden">
           <span className="text-xl font-bold text-gradient">SEEDLINK</span>
+        </div>
+        <div className="hidden md:block">
+          <h1 className="text-xl font-semibold">{pageTitle}</h1>
         </div>
         <div className="relative hidden md:flex items-center w-full max-w-md">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-seedlink-muted-text" size={18} />
