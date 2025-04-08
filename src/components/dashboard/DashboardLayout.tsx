@@ -26,7 +26,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <Sidebar />
       
       <div className="flex-1 flex flex-col overflow-hidden">
-        <Navbar className="" pageTitle={getPageTitle()} />
+        <Navbar pageTitle={getPageTitle()} />
         
         <main className="flex-1 overflow-y-auto p-6">
           <div className="container mx-auto">
