@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import { Input } from '@/components/ui/input';
@@ -118,6 +117,87 @@ const agriculturalFunds = [
   }
 ];
 
+// Fund Card Component
+interface FundProps {
+  fund: {
+    id: number;
+    name: string;
+    description: string;
+    location: string;
+    cropTypes: string[];
+    fundSize: string;
+    returnRate: string;
+    riskLevel: string;
+    minInvestment: string;
+    sustainabilityScore: string;
+    image: string;
+  };
+  onViewDetails: () => void;
+}
+
+const FundCard = ({ fund, onViewDetails }: FundProps) => {
+  return (
+    <Card className="bg-seedlink-dark-card border-white/5 overflow-hidden flex flex-col hover:border-seedlink-secondary/40 transition-all">
+      <div className="h-48 overflow-hidden">
+        <img 
+          src={fund.image} 
+          alt={fund.name} 
+          className="w-full h-full object-cover transition-transform hover:scale-105"
+        />
+      </div>
+      <CardHeader>
+        <div className="flex justify-between items-start">
+          <CardTitle className="text-lg">{fund.name}</CardTitle>
+          <Badge variant="secondary" className="bg-seedlink-secondary/20 text-seedlink-secondary">
+            {fund.sustainabilityScore}
+          </Badge>
+        </div>
+        <div className="flex items-center text-sm text-seedlink-muted-text">
+          <MapPin className="mr-1" size={14} /> {fund.location}
+        </div>
+      </CardHeader>
+      <CardContent className="flex-grow">
+        <p className="text-sm text-seedlink-light-text mb-4 line-clamp-2">
+          {fund.description}
+        </p>
+        <div className="grid grid-cols-2 gap-y-2 text-sm">
+          <div className="flex items-center text-seedlink-muted-text">
+            <DollarSign className="mr-1" size={14} /> Fund Size
+          </div>
+          <div className="text-seedlink-light-text">{fund.fundSize}</div>
+          
+          <div className="flex items-center text-seedlink-muted-text">
+            <DollarSign className="mr-1" size={14} /> Min Investment
+          </div>
+          <div className="text-seedlink-light-text">{fund.minInvestment}</div>
+          
+          <div className="flex items-center text-seedlink-muted-text">
+            <Sprout className="mr-1" size={14} /> Crop Types
+          </div>
+          <div className="text-seedlink-light-text">{fund.cropTypes.join(', ')}</div>
+          
+          <div className="flex items-center text-seedlink-muted-text">
+            <Info className="mr-1" size={14} /> Risk Level
+          </div>
+          <div className="text-seedlink-light-text">{fund.riskLevel}</div>
+        </div>
+      </CardContent>
+      <CardFooter className="flex justify-between items-center pt-2">
+        <div className="text-seedlink-secondary font-medium">{fund.returnRate}</div>
+        <Button
+          variant="outline"
+          size="sm"
+          className="border-seedlink-secondary text-seedlink-secondary hover:bg-seedlink-secondary/10"
+          onClick={onViewDetails}
+        >
+          View Details
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+};
+
+// Main InvestmentsPage component
 const InvestmentsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [locationFilter, setLocationFilter] = useState<string>('');
@@ -189,13 +269,22 @@ const InvestmentsPage = () => {
                 <SelectValue placeholder="Location" />
               </SelectTrigger>
               <SelectContent className="bg-seedlink-dark-card border-white/5">
-                <SelectItem value="">All Locations</SelectItem>
-                <SelectItem value="USA">United States</SelectItem>
-                <SelectItem value="Europe">Europe</SelectItem>
-                <SelectItem value="Brazil">Brazil</SelectItem>
-                <SelectItem value="Australia">Australia</SelectItem>
-                <SelectItem value="Asia">Asia</SelectItem>
-                <SelectItem value="Canada">Canada</SelectItem>
+                {[
+                  { id: 1, name: 'All Locations' },
+                  { id: 2, name: 'United States' },
+                  { id: 3, name: 'Europe' },
+                  { id: 4, name: 'Brazil' },
+                  { id: 5, name: 'Australia' },
+                  { id: 6, name: 'Asia' },
+                  { id: 7, name: 'Canada' }
+                ].map((type) => (
+                  <SelectItem 
+                    key={type.id} 
+                    value={type.id.toString()} // Ensure we're passing a non-empty string value
+                  >
+                    {type.name}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
 
@@ -204,12 +293,21 @@ const InvestmentsPage = () => {
                 <SelectValue placeholder="Crop Type" />
               </SelectTrigger>
               <SelectContent className="bg-seedlink-dark-card border-white/5">
-                <SelectItem value="">All Crops</SelectItem>
-                <SelectItem value="Grain">Grains</SelectItem>
-                <SelectItem value="Fruit">Fruits</SelectItem>
-                <SelectItem value="Nuts">Nuts</SelectItem>
-                <SelectItem value="Coffee">Coffee</SelectItem>
-                <SelectItem value="Wine">Wine Grapes</SelectItem>
+                {[
+                  { id: 1, name: 'All Crops' },
+                  { id: 2, name: 'Grains' },
+                  { id: 3, name: 'Fruits' },
+                  { id: 4, name: 'Nuts' },
+                  { id: 5, name: 'Coffee' },
+                  { id: 6, name: 'Wine Grapes' }
+                ].map((type) => (
+                  <SelectItem 
+                    key={type.id} 
+                    value={type.id.toString()} // Ensure we're passing a non-empty string value
+                  >
+                    {type.name}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
 
@@ -218,10 +316,19 @@ const InvestmentsPage = () => {
                 <SelectValue placeholder="Risk Level" />
               </SelectTrigger>
               <SelectContent className="bg-seedlink-dark-card border-white/5">
-                <SelectItem value="">All Risk Levels</SelectItem>
-                <SelectItem value="Low">Low</SelectItem>
-                <SelectItem value="Moderate">Moderate</SelectItem>
-                <SelectItem value="High">High</SelectItem>
+                {[
+                  { id: 1, name: 'All Risk Levels' },
+                  { id: 2, name: 'Low' },
+                  { id: 3, name: 'Moderate' },
+                  { id: 4, name: 'High' }
+                ].map((type) => (
+                  <SelectItem 
+                    key={type.id} 
+                    value={type.id.toString()} // Ensure we're passing a non-empty string value
+                  >
+                    {type.name}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
@@ -285,86 +392,6 @@ const InvestmentsPage = () => {
         onOpenChange={setDetailsOpen} 
       />
     </DashboardLayout>
-  );
-};
-
-// Fund Card Component
-interface FundProps {
-  fund: {
-    id: number;
-    name: string;
-    description: string;
-    location: string;
-    cropTypes: string[];
-    fundSize: string;
-    returnRate: string;
-    riskLevel: string;
-    minInvestment: string;
-    sustainabilityScore: string;
-    image: string;
-  };
-  onViewDetails: () => void;
-}
-
-const FundCard = ({ fund, onViewDetails }: FundProps) => {
-  return (
-    <Card className="bg-seedlink-dark-card border-white/5 overflow-hidden flex flex-col hover:border-seedlink-secondary/40 transition-all">
-      <div className="h-48 overflow-hidden">
-        <img 
-          src={fund.image} 
-          alt={fund.name} 
-          className="w-full h-full object-cover transition-transform hover:scale-105"
-        />
-      </div>
-      <CardHeader>
-        <div className="flex justify-between items-start">
-          <CardTitle className="text-lg">{fund.name}</CardTitle>
-          <Badge variant="secondary" className="bg-seedlink-secondary/20 text-seedlink-secondary">
-            {fund.sustainabilityScore}
-          </Badge>
-        </div>
-        <div className="flex items-center text-sm text-seedlink-muted-text">
-          <MapPin className="mr-1" size={14} /> {fund.location}
-        </div>
-      </CardHeader>
-      <CardContent className="flex-grow">
-        <p className="text-sm text-seedlink-light-text mb-4 line-clamp-2">
-          {fund.description}
-        </p>
-        <div className="grid grid-cols-2 gap-y-2 text-sm">
-          <div className="flex items-center text-seedlink-muted-text">
-            <DollarSign className="mr-1" size={14} /> Fund Size
-          </div>
-          <div className="text-seedlink-light-text">{fund.fundSize}</div>
-          
-          <div className="flex items-center text-seedlink-muted-text">
-            <DollarSign className="mr-1" size={14} /> Min Investment
-          </div>
-          <div className="text-seedlink-light-text">{fund.minInvestment}</div>
-          
-          <div className="flex items-center text-seedlink-muted-text">
-            <Sprout className="mr-1" size={14} /> Crop Types
-          </div>
-          <div className="text-seedlink-light-text">{fund.cropTypes.join(', ')}</div>
-          
-          <div className="flex items-center text-seedlink-muted-text">
-            <Info className="mr-1" size={14} /> Risk Level
-          </div>
-          <div className="text-seedlink-light-text">{fund.riskLevel}</div>
-        </div>
-      </CardContent>
-      <CardFooter className="flex justify-between items-center pt-2">
-        <div className="text-seedlink-secondary font-medium">{fund.returnRate}</div>
-        <Button 
-          variant="outline" 
-          size="sm" 
-          className="border-seedlink-secondary text-seedlink-secondary hover:bg-seedlink-secondary/10"
-          onClick={onViewDetails}
-        >
-          View Details
-        </Button>
-      </CardFooter>
-    </Card>
   );
 };
 
