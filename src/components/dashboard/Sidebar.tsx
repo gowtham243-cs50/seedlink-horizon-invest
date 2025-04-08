@@ -76,13 +76,6 @@ const Sidebar = ({ className }: SidebarProps) => {
             active={location.pathname === '/portfolio'}
           />
           <NavItem 
-            to="/market-trends"
-            icon={<LineChart size={20} />} 
-            label="Market Trends" 
-            collapsed={collapsed}
-            active={location.pathname === '/market-trends'}
-          />
-          <NavItem 
             to="/transactions"
             icon={<CreditCard size={20} />} 
             label="Transactions" 
